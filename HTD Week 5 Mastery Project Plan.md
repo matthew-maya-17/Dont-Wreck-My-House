@@ -1,7 +1,7 @@
 # ***Don’t Wreck My House Project Plan***
 
-## Main (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
-### Models - Expected: 03/04/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )
+## Main (Estimated Time To Finish: ~54 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### Models - Expected: 03/04/2025 (Estimated Time To Finish: 4 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )
 1. Guest
    - Fields:
        - Guest_id [int]
@@ -46,7 +46,7 @@
       - Getters
       - Setters
         
-### Data Access Layer - Expected: 03/04/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### Data Access Layer - Expected: 03/04/2025 (Estimated Time To Finish: 8 Hours split int 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 1. Data Exception Class: Extends Exception
    - public DataException(String message) {
       super(message);
@@ -123,7 +123,7 @@ DELETE
    - Looks for a reservation using one of the above READ methods
    - Will only display future reservations
 
-### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: 8 hours split into 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 1. ReservationResult
    - private final ArrayList<Reservation> reservations = new ArrayList<>();
    - private Reservation reservation;
@@ -157,7 +157,7 @@ DELETE
    - Update + validations checked
    - Delete + validations checked
 
-### UI Layer - Expected: 03/06/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### UI Layer - Expected: 03/06/2025 (Estimated Time To Finish: 10 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 1. MainMenuOption (ENUM)
 2. ConsoleIO (If I wanna make a separate class or integrate directly into View)
 3. View: UI Validation  (Expecting the view layer will be broken up into three sections (I/O methods,View + Add, and  Update + Delete) will each take about 4 hours with their corresponding testing)
@@ -168,15 +168,15 @@ DELETE
    - Update Reservations
    - Delete Reservations
 
-### App.Java - Expected: 03/06/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### App.Java - Expected: 03/06/2025 (Estimated Time To Finish: 2 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 - Dependency injections + setting up the application to run with instance method call (run).
 - Resource File: dependency-injection.xml
 
-### FINAL DEBUGGING + RESEARCH - Expected: 03/06/2025 - 03/07/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### FINAL DEBUGGING + RESEARCH - Expected: 03/06/2025 - 03/07/2025 (Estimated Time To Finish: 8 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 - Solve any unresolved final issues
 
 ## Tests - Expected: 03/05/2025 - 03/06/2025
-### Data Access Layer Tests (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### Data Access Layer Tests (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 1. GuestFileRepositoryTest
 2. GuestRepositoryDouble
 3. HostFileRepositoryTest
@@ -184,7 +184,7 @@ DELETE
 5. RegistrationFileRepositoryTest
 6. RegistrationRepositoryDouble
    
-### Domain/Service Layer Tests - Expected: 03/06/2025 - 03/7/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### Domain/Service Layer Tests - Expected: 03/06/2025 - 03/7/2025 (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 1. GuestServiceTest
 2. HostServiceTest
 3. RegistrationServiceTest
