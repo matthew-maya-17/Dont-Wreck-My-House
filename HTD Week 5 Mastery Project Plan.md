@@ -1,7 +1,7 @@
 # ***Don’t Wreck My House Project Plan***
 
-## Main (Estimated Time To Finish: 55 Hours    Actual Time Taken: ) 
-### Models (Estimated Time To Finish:    Actual Time Taken: ) 
+## Main (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### Models - Expected: 03/04/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )
 1. Guest
    - Fields:
        - Guest_id [int]
@@ -29,7 +29,9 @@
        - Weekend rate [Big Decimal]
   - Constructor
   -  Methods
-      - Getters  
+      - Getters
+      - equals
+      - hashCode  
 3. Reservation
   - Fields
       - id [int]
@@ -44,12 +46,11 @@
       - Getters
       - Setters
         
-### Data Access Layer (Estimated Time To Finish:    Actual Time Taken: ) 
+### Data Access Layer - Expected: 03/04/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 1. Data Exception Class: Extends Exception
    - public DataException(String message) {
       super(message);
      }
-
 
    - public DataException(Throwable cause) {
       super(cause);
@@ -122,8 +123,8 @@ DELETE
    - Looks for a reservation using one of the above READ methods
    - Will only display future reservations
 
-### Domain/Service Layer (Estimated Time To Finish:    Actual Time Taken: ) 
-1. ReservationResult (This + GuestService + HostService will take about 4 hours, meaning testing will take an additional 4 hours)
+### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+1. ReservationResult
    - private final ArrayList<Reservation> reservations = new ArrayList<>();
    - private Reservation reservation;
 
@@ -150,31 +151,32 @@ DELETE
    - Include all view methods used
 3. HostService
    - Include all view methods used
-4. ReservationService (Expecting this Service Class will be broken up into two sections (View + Add + Testing & Update + Delete + Testing) and each take about 4 hours with their corresponding testing)
+4. ReservationService
    - Include all view methods used
    - Add + validations
    - Update + validations checked
    - Delete + validations checked
 
-### UI Layer (Estimated Time To Finish:    Actual Time Taken: ) 
+### UI Layer - Expected: 03/06/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 1. MainMenuOption (ENUM)
 2. ConsoleIO (If I wanna make a separate class or integrate directly into View)
 3. View: UI Validation  (Expecting the view layer will be broken up into three sections (I/O methods,View + Add, and  Update + Delete) will each take about 4 hours with their corresponding testing)
-4. Controller: (Will take another 4 hours to complete) 
+4. Controller: 
    - Menu
    - View Reservations
    - Add Reservations
    - Update Reservations
    - Delete Reservations
 
-### App.Java (Estimated Time To Finish:    Actual Time Taken: ) 
+### App.Java - Expected: 03/06/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 - Dependency injections + setting up the application to run with instance method call (run).
+- Resource File: dependency-injection.xml
 
-### FINAL DEBUGGING + RESEARCH (Estimated Time To Finish:    Actual Time Taken: ) 
-- Solve any unresolved final issues (~8 Hours)
+### FINAL DEBUGGING + RESEARCH - Expected: 03/06/2025 - 03/07/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+- Solve any unresolved final issues
 
-## Tests
-### Data Access Layer Tests (Estimated Time To Finish:    Actual Time Taken: ) 
+## Tests - Expected: 03/05/2025 - 03/06/2025
+### Data Access Layer Tests (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
 1. GuestFileRepositoryTest
 2. GuestRepositoryDouble
 3. HostFileRepositoryTest
@@ -182,7 +184,7 @@ DELETE
 5. RegistrationFileRepositoryTest
 6. RegistrationRepositoryDouble
    
-### Domain/Service Layer Tests (Estimated Time To Finish:    Actual Time Taken: ) 
+### Domain/Service Layer Tests - Expected: 03/06/2025 - 03/7/2025 (Estimated Time To Finish: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
 1. GuestServiceTest
 2. HostServiceTest
 3. RegistrationServiceTest
