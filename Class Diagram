@@ -1,0 +1,88 @@
+Class Diagram
+
+src
+├───main
+│   ├───java
+│   │   └───learn
+│   │       └───Mastery
+│   │           │   App.java
+│   │           │
+│   │           ├───data
+│   │           │       DataException.java
+│   │           │       GuestRepository.java
+│   │           │       GuestFileRepository.java
+│   │           │       HostRepository.java
+│   │           │       HostFileRepository.java
+│   │           │       ReservationRepository.java
+│   │           │       ReservationFileRepository.java
+│   │           │
+│   │           ├───domain
+│   │           │       GuestService.java
+│   │           │       HostService.java
+│   │           │       ReservationService.java
+│   │           │       ReservationResult.java
+│   │           │       
+│   │           │
+│   │           ├───models
+│   │           │       Guest.java
+│   │           │       Host.java
+│   │           │       Reservation.java
+│   │           │       
+│   │           │
+│   │           └───ui
+│   │                   ConsoleIO.java
+│   │                   Controller.java
+│   │                   View.java
+│   │                   MainMenuOption.java
+│   │                   
+│   │
+│   └───resources
+└───test
+    └───java
+        └───learn
+            └───foraging
+                ├───data
+                │       GuestFileRepositoryTest.java
+                │       GuestRepositoryDouble.java
+                │       HostFileRepositoryTest.java
+                │       HostRepositoryDouble.java
+                │       ReservationFileRepositoryTest.java
+                │       ReservationRepositoryDouble.java
+                │
+                └───domain
+                        GuestServiceTest.java
+                        HostServiceTest.java
+                        ReservationServiceTest.java
+
+Subclass:
+DataException (Is-A) --> Exception
+
+Interfaces:
+1. GuestRepository.java <-- (Is-A) GuestFileRepository.java
+2. HostRepository.java <-- (Is-A) HostFileRepository.java
+3. ReservationRepository.java <-- (Is-A) ReservationFileRepository.java
+4. GuestRepositoryDouble <-- (Is-A) GuestRepository
+5. HostRepositoryDouble <-- (Is-A) HostRepository
+6. ReservationRepositoryDouble <-- (Is-A) ReservationRepository
+
+Dependencies:
+1. View (Dependent on) --> ConsoleIO
+2. GuestFileRepository("./data/guests.csv")
+3. HostFileRepository("./data/hosts.csv")
+4. ReservationFileRepository(".data/reservations" + filepath)
+5. GuestService (Dependent on) --> GuestFileRepository
+6. HostService (Dependent on) --> HostFileRepository
+7. ReservationService (Dependent on) --> ReservationFileRepository, HostFileRepository, GuestFileRepository
+8. Controller (Dependent on) --> GuestService, HostService, ReservationService
+
+Which class will have CRUD methods?
+CREATE:
+1. ReservationRepository/ReservationFileRepository/ReservationService
+READ:
+1. GuestRepository/GuestFileRepository/GuestService
+2. HostRepository/HostFileRepository/HostService
+3. ReservationRepository/ReservationFileRepository/ReservationService
+UPDATE:
+1. ReservationRepository/ReservationFileRepository/ReservationService
+DELETE:
+1. ReservationRepository/ReservationFileRepository/ReservationService
