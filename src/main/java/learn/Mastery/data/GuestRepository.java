@@ -1,4 +1,12 @@
 package learn.Mastery.data;
 
-public class GuestRepository {
+import learn.Mastery.models.Guest;
+
+import java.util.List;
+
+public interface GuestRepository {
+
+    List<Guest> findAll() throws DataException;
+
+    Guest findByEmail(String email) throws DataException;
 }

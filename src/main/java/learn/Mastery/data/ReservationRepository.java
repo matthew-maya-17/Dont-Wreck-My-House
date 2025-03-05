@@ -1,4 +1,18 @@
 package learn.Mastery.data;
 
-public class ReservationRepository {
+import learn.Mastery.models.Host;
+import learn.Mastery.models.Reservation;
+
+import java.util.List;
+
+public interface ReservationRepository {
+
+    List<Reservation> findByHostId(Host host) throws DataException;
+
+    Reservation addReservation(Reservation reservation) throws DataException;
+
+    Boolean updateReservation(Reservation reservation) throws DataException;
+
+    Boolean deleteReservation(Reservation reservation) throws DataException;
+
 }

@@ -2,23 +2,16 @@ package learn.Mastery.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Reservation {
     private int reservation_id;
     private LocalDate start_date;
     private LocalDate end_date;
-    private int guest_id;
     private BigDecimal total;
-    private Guest guest;
-    private Host host;
 
-    public Reservation(int reservation_id, BigDecimal total, int guest_id, LocalDate end_date, LocalDate start_date) {
-        this.reservation_id = reservation_id;
-        this.total = total;
-        this.guest_id = guest_id;
-        this.end_date = end_date;
-        this.start_date = start_date;
-    }
+    private Host host;
+    private Guest guest;
 
     public int getReservation_id() {
         return reservation_id;
@@ -44,14 +37,6 @@ public class Reservation {
         this.end_date = end_date;
     }
 
-    public int getGuest_id() {
-        return guest_id;
-    }
-
-    public void setGuest_id(int guest_id) {
-        this.guest_id = guest_id;
-    }
-
     public BigDecimal getTotal() {
         return total;
     }
@@ -74,5 +59,17 @@ public class Reservation {
 
     public void setHost(Host host) {
         this.host = host;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return reservation_id == that.reservation_id && Objects.equals(start_date, that.start_date) && Objects.equals(end_date, that.end_date) && Objects.equals(total, that.total) && Objects.equals(guest, that.guest) && Objects.equals(host, that.host);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(reservation_id, start_date, end_date, total, guest, host);
     }
 }

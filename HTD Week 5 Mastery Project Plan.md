@@ -1,7 +1,7 @@
 # ***Don’t Wreck My House Project Plan***
 
 ## Main (Estimated Time To Finish: ~54 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
-### Models - Expected: 03/04/2025 (Estimated Time To Finish: 4 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )
+### Models - Expected: 03/04/2025 (Estimated Time To Finish: 4 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~1 Hours)
 1. Guest
    - Fields:
        - Guest_id [int]
@@ -46,7 +46,7 @@
       - Getters
       - Setters
         
-### Data Access Layer - Expected: 03/04/2025 (Estimated Time To Finish: 8 Hours split int 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### Data Access Layer - Expected: 03/04/2025 (Estimated Time To Finish: 8 Hours split int 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~6 Hours) 
 1. Data Exception Class: Extends Exception
    - public DataException(String message) {
       super(message);
