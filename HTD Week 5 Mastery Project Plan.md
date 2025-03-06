@@ -123,12 +123,12 @@ DELETE
    - Looks for a reservation using one of the above READ methods
    - Will only display future reservations
 
-### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: 8 hours split into 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ) 
+### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: 8 hours split into 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~3 hours so far) 
 1. ReservationResult
    - private final ArrayList<Reservation> reservations = new ArrayList<>();
    - private Reservation reservation;
 
-   - public Panel getReservation(){
+   - public Reservation getReservation(){
       return reservation;
      }
 
@@ -176,7 +176,7 @@ DELETE
 - Solve any unresolved final issues
 
 ## Tests - Expected: 03/05/2025 - 03/06/2025
-### Data Access Layer Tests (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### Data Access Layer Tests (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~ 2 hours so far)  
 1. GuestFileRepositoryTest
 2. GuestRepositoryDouble
 3. HostFileRepositoryTest

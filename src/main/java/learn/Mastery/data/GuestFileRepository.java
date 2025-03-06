@@ -3,7 +3,6 @@ package learn.Mastery.data;
 import learn.Mastery.models.Guest;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +30,6 @@ public class GuestFileRepository implements GuestRepository{
                     result.add(deserialize(fields));
                 }
             }
-        } catch (FileNotFoundException ex) {
-
         } catch (IOException e) {
             throw new DataException("Failed to read guest data from file: " + filePath, e);
         }

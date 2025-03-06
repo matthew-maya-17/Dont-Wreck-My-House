@@ -3,7 +3,6 @@ package learn.Mastery.data;
 import learn.Mastery.models.Host;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -33,8 +32,6 @@ public class HostFileRepository implements HostRepository{
                     result.add(deserialize(fields));
                 }
             }
-
-        } catch (FileNotFoundException ex) {
 
         } catch (IOException e) {
             //Don't throw on a read
