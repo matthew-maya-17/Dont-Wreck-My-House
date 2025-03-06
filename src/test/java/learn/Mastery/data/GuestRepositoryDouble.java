@@ -34,9 +34,8 @@ public class GuestRepositoryDouble implements GuestRepository{
 
 
     @Override
-    public List<Guest> findAll() throws DataException {
-        return guests.stream()
-                .collect(Collectors.toList());
+    public List<Guest> findAll() {
+        return new ArrayList<>(guests);
     }
 
     @Override

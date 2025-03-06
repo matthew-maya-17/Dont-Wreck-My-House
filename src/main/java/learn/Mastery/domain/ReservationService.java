@@ -20,7 +20,8 @@ public class ReservationService {
     GuestRepository guestRepository;
     ReservationRepository reservationRepository;
 
-    public ReservationService(ReservationRepository reservationRepository, GuestRepository guestRepository, HostRepository hostRepository) {
+    public ReservationService(ReservationRepository reservationRepository,
+                              GuestRepository guestRepository, HostRepository hostRepository) {
         this.reservationRepository = reservationRepository;
         this.guestRepository = guestRepository;
         this.hostRepository = hostRepository;

@@ -16,9 +16,15 @@ public class HostService {
         this.hostRepository = hostRepository;
     }
 
-    public List<Host> findByEmail(String email) throws DataException, FileNotFoundException {
+    public List<Host> findAll() throws DataException, FileNotFoundException {
+        return hostRepository.findAll();
+    }
+
+
+    public Host findByEmail(String email) throws DataException, FileNotFoundException {
         return hostRepository.findAll().stream()
                 .filter(guest -> guest.getEmail().equals(email))
-                .collect(Collectors.toList());
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -15,6 +15,10 @@ public class GuestService {
         this.guestRepository = guestRepository;
     }
 
+    public List<Guest> findAll() throws DataException {
+        return guestRepository.findAll();
+    }
+
     public Guest findByEmail(String email) throws DataException {
         return guestRepository.findAll().stream()
                 .filter(guest -> guest.getEmail().equals(email))

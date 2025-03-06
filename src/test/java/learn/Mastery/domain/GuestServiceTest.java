@@ -21,9 +21,37 @@ class GuestServiceTest {
     }
 
     @Test
-    void shouldFindExistingEmail() throws DataException {
-        List<Guest> guests = guestService.findByEmail("mattewmatt2009@hotmail.com");
+    void shouldFindAll() throws DataException {
+        List<Guest> guests = guestService.findAll();
         assertNotNull(guests);
+        assertEquals(5, guests.size());
+        assertEquals("Sandra", guests.get(3).getFirst_name());
+        assertEquals("Martinez", guests.get(3).getLast_name());
+    }
+
+    @Test
+    void shouldFindExistingEmail() throws DataException {
+        Guest guest1 = guestService.findByEmail("matthewmatt2009@hotmail.com");
+        assertNotNull(guest1);
+        assertEquals("NY", guest1.getState());
+        assertEquals("(631) 3539689", guest1.getPhoneNumber());
+
+        Guest guest2 = guestService.findByEmail("nikakhvan@gmail.com");
+        assertNotNull(guest2);
+        assertEquals("FL", guest2.getState());
+        assertEquals("(305) 7738921", guest2.getPhoneNumber());
+    }
+
+    @Test
+    void shouldNotFindNullEmail() throws DataException {
+        Guest guest1 = guestService.findByEmail(null);
+        assertNull(guest1);
+    }
+
+    @Test
+    void shouldNotFindNonExistingEmail() throws DataException {
+        Guest guest1 = guestService.findByEmail("TestNotInDOUBLE@AOL.com");
+        assertNull(guest1);
     }
 
 }
