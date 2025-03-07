@@ -6,7 +6,6 @@ import learn.Mastery.models.Host;
 
 import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HostService {
 
@@ -19,7 +18,6 @@ public class HostService {
     public List<Host> findAll() throws DataException, FileNotFoundException {
         return hostRepository.findAll();
     }
-
 
     public Host findByEmail(String email) throws DataException, FileNotFoundException {
         return hostRepository.findAll().stream()

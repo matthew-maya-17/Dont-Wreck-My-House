@@ -9,6 +9,8 @@ import learn.Mastery.models.Host;
 import learn.Mastery.models.Reservation;
 
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -42,47 +44,110 @@ public class ReservationService {
         return result;
     }
 
-    public ReservationResult<Reservation> addReservation(Reservation reservation) throws DataException {
-        ReservationResult<Reservation> result = validate(reservation);
+    public ReservationResult<Reservation> addReservation(Reservation addedReservation) throws DataException {
+        ReservationResult<Reservation> result = validate(addedReservation);
 
         if (!result.isSuccess()){
             return result;
         }
 
-        result.setPayload(reservationRepository.addReservation(reservation));
+        BigDecimal newTotal = calculateReservationTotal(addedReservation);
+        addedReservation.setTotal(newTotal);
+
+        result.setPayload(reservationRepository.addReservation(addedReservation));
 
         return result;
     }
 
-    public ReservationResult<Reservation> updateReservation(Reservation reservation) throws DataException {
-        ReservationResult<Reservation> result = validate(reservation);
+    public ReservationResult<Reservation> updateReservation(Reservation updatedReservation) throws DataException {
+        ReservationResult<Reservation> result = validate(updatedReservation);
 
         if (!result.isSuccess()){
             return result;
         }
 
-        boolean updated = reservationRepository.updateReservation(reservation);
+        List<Reservation> reservations = reservationRepository.findByHostId(updatedReservation.getHost().getHost_id());
+        Reservation existingReservation = reservations.stream()
+                .filter(r -> r.getReservation_id() == updatedReservation.getReservation_id())
+                .findFirst()
+                .orElse(null);
+
+        if (existingReservation == null) {
+            result.addErrorMessage("Reservation not found.");
+            return result;
+        }
+
+        if (!existingReservation.getGuest().equals(updatedReservation.getGuest()) ||
+                !existingReservation.getHost().equals(updatedReservation.getHost()) ||
+                !existingReservation.getTotal().equals(updatedReservation.getTotal())) {
+            result.addErrorMessage("Only start and end dates can be changed.");
+            return result;
+        }
+
+        BigDecimal newTotal = calculateReservationTotal(updatedReservation);
+        updatedReservation.setTotal(newTotal);
+
+        boolean updated = reservationRepository.updateReservation(updatedReservation);
 
         if (!updated){
-            result.addErrorMessage(String.format("Error with reservation id: %s", reservation.getReservation_id()));
+            result.addErrorMessage(String.format("Failed to update reservation with id: %s.", updatedReservation.getReservation_id()));
+        } else {
+            result.setPayload(updatedReservation);
         }
 
         return result;
     }
 
-    public ReservationResult<Reservation> deleteReservation(Reservation reservation) throws DataException {
+    public ReservationResult<Reservation> deleteReservation(Reservation deletedReservation) throws DataException {
         ReservationResult<Reservation> result = new ReservationResult<>();
 
-        if(reservation.getStart_date().isBefore(LocalDate.now()) && reservation.getEnd_date().isBefore(LocalDate.now())){
+        Reservation existingReservations = findExistingReservation(deletedReservation);
+
+        if (existingReservations == null) {
+            result.addErrorMessage("Reservation not found.");
+            return result;
+        }
+
+        if(existingReservations.getStart_date().isBefore(LocalDate.now())){
             result.addErrorMessage("You can only delete a reservation in the future!");
             return result;
         }
 
-        if (!reservationRepository.deleteReservation(reservation)){
+        if (!reservationRepository.deleteReservation(existingReservations)){
             result.addErrorMessage("Reservation does not exist");
             return result;
         }
         return result;
+    }
+
+    private Reservation findExistingReservation(Reservation reservation) throws DataException {
+        List<Reservation> reservations = reservationRepository.findByHostId(reservation.getHost().getHost_id());
+
+        return reservations.stream()
+                .filter(r -> r.getReservation_id() == reservation.getReservation_id())
+                .findFirst()
+                .orElse(null);
+    }
+
+    private BigDecimal calculateReservationTotal(Reservation reservation) {
+        BigDecimal total = BigDecimal.ZERO;
+        LocalDate start = reservation.getStart_date();
+        LocalDate end = reservation.getEnd_date();
+        Host host = reservation.getHost();
+
+        if (start == null || end == null) {
+            return BigDecimal.ZERO;
+        }
+
+        while(!start.isAfter(end)){
+            if(start.getDayOfWeek().equals(DayOfWeek.FRIDAY) || start.getDayOfWeek().equals(DayOfWeek.SATURDAY)){
+                total = total.add(host.getWeekendRate());
+            } else {
+                total = total.add(host.getStandardRate());
+            }
+            start = start.plusDays(1);
+        }
+        return total;
     }
 
     private ReservationResult<Reservation> validate(Reservation reservation) throws DataException {
@@ -147,7 +212,6 @@ public class ReservationService {
     }
 
     private void validateChildrenExist(Reservation reservation, ReservationResult<Reservation> result) throws DataException {
-
         if (reservation.getHost().getHost_id() == null
                 || hostRepository.findByEmail(reservation.getHost().getEmail()) == null) {
             result.addErrorMessage("Host does not exist.");

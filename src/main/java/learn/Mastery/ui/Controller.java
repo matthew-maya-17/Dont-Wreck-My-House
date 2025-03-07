@@ -4,7 +4,11 @@ import learn.Mastery.data.DataException;
 import learn.Mastery.domain.GuestService;
 import learn.Mastery.domain.HostService;
 import learn.Mastery.domain.ReservationService;
+import learn.Mastery.models.Guest;
+import learn.Mastery.models.Host;
+import learn.Mastery.models.Reservation;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -23,45 +27,59 @@ public class Controller {
         this.view = view;
     }
 
-    public void run() {
-        view.displayHeader("Welcome to Sustainable Foraging");
-        try {
-            runAppLoop();
-        } catch (DataException ex) {
-            view.displayException(ex);
-        }
-        view.displayHeader("Goodbye.");
-    }
-
-    private void runAppLoop() throws DataException {
-        MainMenuOption option;
-        do {
-            option = view.selectMainMenuOption();
-            switch (option) {
-                case VIEW_RESERVATIONS:
-                    viewReservations();
-                    break;
-                case ADD_RESERVATION:
-                    addReservation();
-                    break;
-                case EDIT_RESERVATION:
-                    editReservation();
-                    break;
-                case DELETE_RESERVATION:
-                    deleteReservation();
-                    break;
-                case GENERATE:
-                    generate();
-                    break;
-            }
-        } while (option != MainMenuOption.EXIT);
-    }
+//    public void run() {
+//        view.displayHeader("Welcome to Mastery Project: Don't Wreck My House");
+//        try {
+//            runAppLoop();
+//        } catch (DataException ex) {
+//            view.displayException(ex);
+//        }
+//        view.displayHeader("Goodbye.");
+//    }
+//
+//    private void runAppLoop() throws DataException {
+//        MainMenuOption option;
+//        do {
+//            option = view.selectMainMenuOption();
+//            switch (option) {
+//                case VIEW_RESERVATIONS:
+//                    viewReservations();
+//                    break;
+//                case ADD_RESERVATION:
+//                    addReservation();
+//                    break;
+//                case EDIT_RESERVATION:
+//                    editReservation();
+//                    break;
+//                case DELETE_RESERVATION:
+//                    deleteReservation();
+//                    break;
+//                case GENERATE:
+//                    generate();
+//                    break;
+//            }
+//        } while (option != MainMenuOption.EXIT);
+//    }
 
     // top level menu
     private void viewReservations() {
     }
 
-    private void addReservation() {
+    private void addReservation() throws DataException, FileNotFoundException {
+        view.displayHeader(MainMenuOption.ADD_RESERVATION.getMessage());
+        String guestEmail = view.getEmail("Guest");
+        String hostEmail = view.getEmail("Host");
+        Host hostLocation = hostService.findByEmail(hostEmail);
+        List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
+        for (Reservation r: reservations){
+            System.out.printf("ID: %s, %s - %s, Guest: %s, %s, Email: %s",
+                    r.getReservation_id(),
+                    r.getStart_date(),
+                    r.getEnd_date(),
+                    r.getGuest().getLast_name(),
+                    r.getGuest().getFirst_name(),
+                    r.getGuest().getEmail());
+        }
 
     }
 
@@ -74,15 +92,15 @@ public class Controller {
     }
 
     // support methods
-    private Forager getForager() {
-        String lastNamePrefix = view.getForagerNamePrefix();
-        List<Forager> foragers = foragerService.findByLastName(lastNamePrefix);
-        return view.chooseForager(foragers);
-    }
-
-    private Item getItem() {
-        Category category = view.getItemCategory();
-        List<Item> items = itemService.findByCategory(category);
-        return view.chooseItem(items);
-    }
+//    private Host getHost() {
+//        String lastNamePrefix = view.getForagerNamePrefix();
+//        List<Host> foragers = foragerService.findByLastName(lastNamePrefix);
+//        return view.chooseForager(foragers);
+//    }
+//
+//    private Guest getGuest() {
+//        Category category = view.getItemCategory();
+//        List<Guest> items = itemService.findByCategory(category);
+//        return view.chooseItem(items);
+//    }
 }

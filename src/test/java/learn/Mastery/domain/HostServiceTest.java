@@ -3,7 +3,6 @@ package learn.Mastery.domain;
 import learn.Mastery.data.DataException;
 import learn.Mastery.data.HostRepository;
 import learn.Mastery.data.HostRepositoryDouble;
-import learn.Mastery.models.Guest;
 import learn.Mastery.models.Host;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

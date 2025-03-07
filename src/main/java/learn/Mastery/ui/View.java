@@ -1,5 +1,9 @@
 package learn.Mastery.ui;
 
+import learn.Mastery.models.Reservation;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class View {
@@ -25,6 +29,20 @@ public class View {
         String message = String.format("Select [%s-%s]: ", min, max - 1);
         return MainMenuOption.fromValue(io.readInt(message, min, max));
     }
+
+    public String getEmail(String emailOwner){
+        return io.readRequiredString(String.format("%s Email: ", emailOwner));
+    }
+
+    public void reservationSummary(){
+        LocalDate start = io.readLocalDate("Start Date: ");
+        LocalDate end = io.readLocalDate("End Date: ");
+        displayHeader("Summary");
+        io.println("Start: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString());
+        io.println("End: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString());
+
+    }
+
 
     public void displayHeader(String message) {
         io.println("");

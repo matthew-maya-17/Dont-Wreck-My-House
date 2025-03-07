@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,17 +20,17 @@ class ReservationServiceTest {
 
     @BeforeEach
     void setup(){
-        HostRepository hostRepository = new HostRepositoryDouble();
-        GuestRepository guestRepository = new GuestRepositoryDouble();
-        ReservationRepository reservationRepository = new ReservationRespositoryDouble();
-        reservationService = new ReservationService(reservationRepository,guestRepository, hostRepository);
+//        HostRepository hostRepository = new HostRepositoryDouble();
+//        GuestRepository guestRepository = new GuestRepositoryDouble();
+//        ReservationRepository reservationRepository = new ReservationRepositoryDouble();
+        reservationService = new ReservationService(new ReservationRepositoryDouble(),new GuestRepositoryDouble(),new HostRepositoryDouble());
     }
 
     @Test
     void shouldFindByHostId() throws DataException, FileNotFoundException {
         List<Reservation> reservations = reservationService.findByHostId("74f32f01-9c6d-4e87-b2d9-d389af693b44");
         assertNotNull(reservations);
-        assertEquals(1, reservations.size());
+        assertEquals(3, reservations.size());
     }
 
     @Test

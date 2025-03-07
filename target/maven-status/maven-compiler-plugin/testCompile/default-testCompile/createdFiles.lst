@@ -1,0 +1,8 @@
+learn\Mastery\data\HostFileRepositoryTest.class
+learn\Mastery\data\ReservationFileRepositoryTest.class
+learn\Mastery\domain\ReservationServiceTest.class
+learn\Mastery\domain\HostServiceTest.class
+learn\Mastery\data\GuestFileRepositoryTest.class
+learn\Mastery\data\HostRepositoryDouble.class
+learn\Mastery\data\GuestRepositoryDouble.class
+learn\Mastery\domain\GuestServiceTest.class

@@ -5,7 +5,6 @@ import learn.Mastery.data.GuestRepository;
 import learn.Mastery.models.Guest;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GuestService {
 

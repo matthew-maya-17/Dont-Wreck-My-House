@@ -1,13 +1,10 @@
 package learn.Mastery.data;
 
 import learn.Mastery.models.Guest;
-import learn.Mastery.models.Host;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GuestRepositoryDouble implements GuestRepository{
 
@@ -31,7 +28,6 @@ public class GuestRepositoryDouble implements GuestRepository{
         guests.add(guest4);
         guests.add(guest5);
     }
-
 
     @Override
     public List<Guest> findAll() {
