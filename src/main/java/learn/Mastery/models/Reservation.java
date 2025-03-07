@@ -1,6 +1,8 @@
 package learn.Mastery.models;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -59,6 +61,25 @@ public class Reservation {
 
     public void setHost(Host host) {
         this.host = host;
+    }
+
+    public BigDecimal setReservationTotal() {
+        LocalDate startDate = getStart_date();
+        LocalDate endDate = getEnd_date();
+
+        if (startDate == null || endDate == null) {
+            return BigDecimal.ZERO;
+        }
+
+        while(!startDate.isAfter(endDate)){
+            if(!(startDate.getDayOfWeek().equals(DayOfWeek.FRIDAY)) || !(startDate.getDayOfWeek().equals(DayOfWeek.SATURDAY))){
+                total = total.add(host.getStandardRate());
+            } else {
+                total = total.add(host.getStandardRate());
+            }
+            startDate = startDate.plusDays(1);
+        }
+        return total;
     }
 
     @Override

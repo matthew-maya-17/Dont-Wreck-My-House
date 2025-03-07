@@ -13,7 +13,7 @@ public class ReservationRespositoryDouble implements ReservationRepository{
 
     static ArrayList<Reservation> reservations = new ArrayList<>();
 
-    public void ReservationResult(){
+    public ReservationRespositoryDouble(){
         Reservation reservation1 = new Reservation();
         reservation1.setReservation_id(1);
         reservation1.setStart_date(LocalDate.of(2027, 8,12));
@@ -28,7 +28,7 @@ public class ReservationRespositoryDouble implements ReservationRepository{
     }
 
     @Override
-    public List<Reservation> findByHostId(Host host) throws DataException {
+    public List<Reservation> findByHostId(String hostId) throws DataException {
         return new ArrayList<>(reservations);
     }
 
@@ -39,11 +39,12 @@ public class ReservationRespositoryDouble implements ReservationRepository{
 
     @Override
     public Boolean updateReservation(Reservation reservation) throws DataException {
-        return reservation.getReservation_id() > 0;
+        return findByHostId(reservation.getHost().getHost_id()) != null;
     }
 
     @Override
     public Boolean deleteReservation(Reservation reservation) throws DataException {
-        return reservation.getReservation_id() == 10;
+        return findByHostId(reservation.getHost().getHost_id()) != null ||
+                (reservation.getStart_date().isBefore(LocalDate.now()) && reservation.getEnd_date().isBefore(LocalDate.now()));
     }
 }

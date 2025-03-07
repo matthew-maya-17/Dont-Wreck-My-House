@@ -39,7 +39,7 @@ class ReservationFileRepositoryTest {
 
     @Test
     void shouldFindExistingHostId() throws DataException {
-        List<Reservation> all = repository.findByHostId(host);
+        List<Reservation> all = repository.findByHostId(host.getHost_id());
         assertNotNull(all);
         assertEquals(3, all.size());
     }
@@ -48,7 +48,7 @@ class ReservationFileRepositoryTest {
     void shouldNotFindNonExistingHostId() throws DataException {
         Host host = new Host();
         host.setHost_id("1234567890");
-        List<Reservation> all = repository.findByHostId(host);
+        List<Reservation> all = repository.findByHostId(host.getHost_id());
         assertEquals(0, all.size());
     }
 
@@ -71,7 +71,7 @@ class ReservationFileRepositoryTest {
 
     @Test
     void shouldUpdateReservation() throws DataException {
-        List<Reservation> all = repository.findByHostId(host);
+        List<Reservation> all = repository.findByHostId(host.getHost_id());
         Reservation index0 = all.get(0);
         index0.setTotal(new BigDecimal(1));
         index0.setStart_date(LocalDate.of(1999, 12, 31));
@@ -86,7 +86,7 @@ class ReservationFileRepositoryTest {
 
     @Test
     void shouldNotUpdateReservation() throws DataException {
-        List<Reservation> all = repository.findByHostId(host);
+        List<Reservation> all = repository.findByHostId(host.getHost_id());
         Reservation index0 = all.get(0);
         index0.setReservation_id(100);
         index0.setTotal(new BigDecimal(1));
@@ -99,13 +99,13 @@ class ReservationFileRepositoryTest {
 
     @Test
     void shouldDeleteReservation() throws DataException {
-        List<Reservation> all = repository.findByHostId(host);
+        List<Reservation> all = repository.findByHostId(host.getHost_id());
         int count = all.size();
         Reservation reservation = all.get(1);
         Boolean result = repository.deleteReservation(reservation);
 
         assertTrue(result);
-        assertEquals(count - 1 , repository.findByHostId(host).size());
+        assertEquals(count - 1 , repository.findByHostId(host.getHost_id()).size());
     }
 
     @Test

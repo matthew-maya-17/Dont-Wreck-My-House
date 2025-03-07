@@ -27,13 +27,13 @@ public class ReservationService {
         this.hostRepository = hostRepository;
     }
 
-    public List<Reservation> findByHostId(Host host) throws DataException, FileNotFoundException {
+    public List<Reservation> findByHostId(String hostId) throws DataException, FileNotFoundException {
         Map<String, Host> hostMap = hostRepository.findAll().stream()
                 .collect(Collectors.toMap(i -> i.getHost_id(), i -> i));
         Map<Integer, Guest> guestMap = guestRepository.findAll().stream()
                 .collect(Collectors.toMap(i -> i.getGuest_Id(), i -> i));
 
-        List<Reservation> result = reservationRepository.findByHostId(host);
+        List<Reservation> result = reservationRepository.findByHostId(hostId);
 
         for (Reservation reservation : result) {
             reservation.setHost(hostMap.get(reservation.getHost().getHost_id()));
@@ -73,8 +73,13 @@ public class ReservationService {
     public ReservationResult<Reservation> deleteReservation(Reservation reservation) throws DataException {
         ReservationResult<Reservation> result = new ReservationResult<>();
 
+        if(reservation.getStart_date().isBefore(LocalDate.now()) && reservation.getEnd_date().isBefore(LocalDate.now())){
+            result.addErrorMessage("You can only delete a reservation in the future!");
+            return result;
+        }
+
         if (!reservationRepository.deleteReservation(reservation)){
-            result.addErrorMessage("Reservation with does not exist");
+            result.addErrorMessage("Reservation does not exist");
             return result;
         }
         return result;
@@ -101,7 +106,7 @@ public class ReservationService {
         ReservationResult<Reservation> result = new ReservationResult<>();
 
         if (reservation == null) {
-            result.addErrorMessage("Nothing to save.");
+            result.addErrorMessage("Nothing to save. Reservation cannot be Null!");
             return result;
         }
 
@@ -133,7 +138,7 @@ public class ReservationService {
             result.addErrorMessage("Reservation start & end date cannot be in the past. They must both be in the future.");
         }
 
-        for(Reservation r : reservationRepository.findByHostId(reservation.getHost())){
+        for(Reservation r : reservationRepository.findByHostId(reservation.getHost().getHost_id())){
             if(!(reservation.getEnd_date().isBefore(r.getStart_date()) ||
                     reservation.getStart_date().isAfter(r.getEnd_date()))){
                 result.addErrorMessage("Reservation overlaps with another of the hosts existing reservations.");
@@ -150,7 +155,7 @@ public class ReservationService {
 
         if (reservation.getHost().getHost_id() == null
                 || guestRepository.findByEmail(reservation.getGuest().getEmail()) == null) {
-            result.addErrorMessage("guest does not exist.");
+            result.addErrorMessage("Guest does not exist.");
         }
     }
 }
