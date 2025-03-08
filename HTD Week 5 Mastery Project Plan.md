@@ -123,7 +123,7 @@ DELETE
    - Looks for a reservation using one of the above READ methods
    - Will only display future reservations
 
-### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: 8 hours split into 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~6 hours) 
+### Domain/Service Layer - Expected: 03/05/2025 (Estimated Time To Finish: 8 hours split into 2 4 hour sections &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~8 hours) 
 1. ReservationResult
    - private final ArrayList<Reservation> reservations = new ArrayList<>();
    - private Reservation reservation;
@@ -168,7 +168,7 @@ DELETE
    - Update Reservations
    - Delete Reservations
 
-### App.Java - Expected: 03/06/2025 (Estimated Time To Finish: 2 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: )  
+### App.Java - Expected: 03/06/2025 (Estimated Time To Finish: 2 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~0.5 hour)  
 - Dependency injections + setting up the application to run with instance method call (run).
 - Resource File: dependency-injection.xml
 
@@ -184,7 +184,7 @@ DELETE
 5. RegistrationFileRepositoryTest
 6. RegistrationRepositoryDouble
    
-### Domain/Service Layer Tests - Expected: 03/06/2025 - 03/7/2025 (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~6 hours so far) 
+### Domain/Service Layer Tests - Expected: 03/06/2025 - 03/7/2025 (Estimated Time To Finish: 7 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~10 hours) 
 1. GuestServiceTest
 2. HostServiceTest
 3. RegistrationServiceTest

@@ -16,7 +16,7 @@ public class ReservationRepositoryDouble implements ReservationRepository{
             "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
             "New Haven","CT","06505",new BigDecimal(464),new BigDecimal(580));
 
-    static ArrayList<Reservation> reservations = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
 
     public ReservationRepositoryDouble(){
         Reservation reservation1 = new Reservation();
@@ -45,8 +45,8 @@ public class ReservationRepositoryDouble implements ReservationRepository{
 
         Reservation reservation3 = new Reservation();
         reservation3.setReservation_id(3);
-        reservation3.setStart_date(LocalDate.of(2027, 8,12));
-        reservation3.setEnd_date(LocalDate.of(2027, 8,19));
+        reservation3.setStart_date(LocalDate.of(2027, 8,27));
+        reservation3.setEnd_date(LocalDate.of(2027, 8,30));
         reservation3.setTotal(new BigDecimal(1900));
         reservation3.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Gery",
                 "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
@@ -57,8 +57,8 @@ public class ReservationRepositoryDouble implements ReservationRepository{
 
         Reservation reservation4 = new Reservation();
         reservation4.setReservation_id(4);
-        reservation4.setStart_date(LocalDate.of(2027, 8,21));
-        reservation4.setEnd_date(LocalDate.of(2027, 8,24));
+        reservation4.setStart_date(LocalDate.of(2024, 8,21));
+        reservation4.setEnd_date(LocalDate.of(2024, 8,24));
         reservation4.setTotal(new BigDecimal(1900));
         reservation4.setHost(new Host("48dc8768-4e33-4257-a0b9-676e7b08cb7f","Charon",
                         "bcharon56@storify.com","(813) 9880586",

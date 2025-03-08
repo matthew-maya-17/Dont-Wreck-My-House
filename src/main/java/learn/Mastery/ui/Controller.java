@@ -27,47 +27,40 @@ public class Controller {
         this.view = view;
     }
 
-//    public void run() {
-//        view.displayHeader("Welcome to Mastery Project: Don't Wreck My House");
-//        try {
-//            runAppLoop();
-//        } catch (DataException ex) {
-//            view.displayException(ex);
-//        }
-//        view.displayHeader("Goodbye.");
-//    }
-//
-//    private void runAppLoop() throws DataException {
-//        MainMenuOption option;
-//        do {
-//            option = view.selectMainMenuOption();
-//            switch (option) {
-//                case VIEW_RESERVATIONS:
-//                    viewReservations();
-//                    break;
-//                case ADD_RESERVATION:
-//                    addReservation();
-//                    break;
-//                case EDIT_RESERVATION:
-//                    editReservation();
-//                    break;
-//                case DELETE_RESERVATION:
-//                    deleteReservation();
-//                    break;
-//                case GENERATE:
-//                    generate();
-//                    break;
-//            }
-//        } while (option != MainMenuOption.EXIT);
-//    }
-
-    // top level menu
-    private void viewReservations() {
+    public void run() {
+        view.displayHeader("Welcome to Mastery Project: Don't Wreck My House");
+        try {
+            runAppLoop();
+        } catch (DataException | FileNotFoundException ex) {
+            view.displayException(ex);
+        }
+        view.displayHeader("Goodbye.");
     }
 
-    private void addReservation() throws DataException, FileNotFoundException {
-        view.displayHeader(MainMenuOption.ADD_RESERVATION.getMessage());
-        String guestEmail = view.getEmail("Guest");
+    private void runAppLoop() throws DataException, FileNotFoundException {
+        MainMenuOption option;
+        do {
+            option = view.selectMainMenuOption();
+            switch (option) {
+                case VIEW_RESERVATIONS:
+                    viewReservations();
+                    break;
+                case ADD_RESERVATION:
+                    addReservation();
+                    break;
+                case EDIT_RESERVATION:
+                    editReservation();
+                    break;
+                case DELETE_RESERVATION:
+                    deleteReservation();
+                    break;
+            }
+        } while (option != MainMenuOption.EXIT);
+    }
+
+    // top level menu
+    private void viewReservations() throws DataException, FileNotFoundException {
+        view.displayHeader("View Reservations for Host");
         String hostEmail = view.getEmail("Host");
         Host hostLocation = hostService.findByEmail(hostEmail);
         List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
@@ -80,21 +73,43 @@ public class Controller {
                     r.getGuest().getFirst_name(),
                     r.getGuest().getEmail());
         }
+        System.out.println();
+    }
+
+    private void addReservation() throws DataException, FileNotFoundException {
+        view.displayHeader(MainMenuOption.ADD_RESERVATION.getMessage());
+        String guestEmail = view.getEmail("Guest");
+        String hostEmail = view.getEmail("Host");
+        Host hostLocation = hostService.findByEmail(hostEmail);
+        List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
+        for (Reservation r: reservations){      //Come back to sort this by date and make sure get future dates. No past dates
+            System.out.printf("ID: %s, %s - %s, Guest: %s, %s, Email: %s",
+                    r.getReservation_id(),
+                    r.getStart_date(),
+                    r.getEnd_date(),
+                    r.getGuest().getLast_name(),
+                    r.getGuest().getFirst_name(),
+                    r.getGuest().getEmail());
+        }
+        view.displayStatus();
+        System.out.println();
 
     }
 
     private void editReservation() {
-
+        view.displayHeader(MainMenuOption.EDIT_RESERVATION.getMessage());
+        String guestEmail = view.getEmail("Guest");
+        String hostEmail = view.getEmail("Host");
     }
 
     private void deleteReservation() throws DataException {
 
     }
 
-    // support methods
+//     support methods
 //    private Host getHost() {
 //        String lastNamePrefix = view.getForagerNamePrefix();
-//        List<Host> foragers = foragerService.findByLastName(lastNamePrefix);
+//        List<Host> hosts = hostService.findByLastName(lastNamePrefix);
 //        return view.chooseForager(foragers);
 //    }
 //

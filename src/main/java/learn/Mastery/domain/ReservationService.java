@@ -114,7 +114,7 @@ public class ReservationService {
         }
 
         if (!reservationRepository.deleteReservation(existingReservations)){
-            result.addErrorMessage("Reservation does not exist");
+            result.addErrorMessage("Reservation deletion failed for some reason.");
             return result;
         }
         return result;
@@ -151,7 +151,6 @@ public class ReservationService {
     }
 
     private ReservationResult<Reservation> validate(Reservation reservation) throws DataException {
-
         ReservationResult<Reservation> result = validateNulls(reservation);
         if (!result.isSuccess()) {
             return result;

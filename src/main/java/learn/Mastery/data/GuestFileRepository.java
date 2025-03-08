@@ -32,7 +32,7 @@ public class GuestFileRepository implements GuestRepository{
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new DataException("The file you are looking for does not exist: " + filePath, e);
+//            throw new DataException("The file you are looking for does not exist: " + filePath, e);
         } catch (IOException e) {
             throw new DataException("Failed to read guest data from file: " + filePath, e);
         }

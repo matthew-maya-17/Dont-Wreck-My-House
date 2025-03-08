@@ -20,9 +20,6 @@ class ReservationServiceTest {
 
     @BeforeEach
     void setup(){
-//        HostRepository hostRepository = new HostRepositoryDouble();
-//        GuestRepository guestRepository = new GuestRepositoryDouble();
-//        ReservationRepository reservationRepository = new ReservationRepositoryDouble();
         reservationService = new ReservationService(new ReservationRepositoryDouble(),new GuestRepositoryDouble(),new HostRepositoryDouble());
     }
 
@@ -221,11 +218,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationThatSurroundsExistingReservation() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
-        test.setStart_date(LocalDate.of(2027, 8,1));
-        test.setEnd_date(LocalDate.of(2027, 8, 29));
+        test.setReservation_id(5);
+        test.setStart_date(LocalDate.of(2027, 8,11));
+        test.setEnd_date(LocalDate.of(2027, 8, 20));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -241,11 +238,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationInsideExistingReservation() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
+        test.setReservation_id(5);
         test.setStart_date(LocalDate.of(2027, 8,14));
         test.setEnd_date(LocalDate.of(2027, 8, 16));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -261,11 +258,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationThatOverlapsStartOfExistingRegistration() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
+        test.setReservation_id(5);
         test.setStart_date(LocalDate.of(2027, 8,11));
         test.setEnd_date(LocalDate.of(2027, 8, 15));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -281,11 +278,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationThatOverlapsEndOfExistingRegistration() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
+        test.setReservation_id(5);
         test.setStart_date(LocalDate.of(2027, 8,15));
         test.setEnd_date(LocalDate.of(2027, 8, 25));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -301,11 +298,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationThatEndsOnTheStartOfExistingRegistration() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
-        test.setStart_date(LocalDate.of(2027, 8,1));
+        test.setReservation_id(5);
+        test.setStart_date(LocalDate.of(2027, 8,7));
         test.setEnd_date(LocalDate.of(2027, 8, 12));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -321,11 +318,11 @@ class ReservationServiceTest {
     @Test
     void shouldNotAddReservationThatStartsOnTheEndOfExistingRegistration() throws DataException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
+        test.setReservation_id(5);
         test.setStart_date(LocalDate.of(2027, 8,19));
         test.setEnd_date(LocalDate.of(2027, 8, 21));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -340,15 +337,64 @@ class ReservationServiceTest {
 
     @Test
     void shouldUpdateReservation() throws DataException, FileNotFoundException {
-        Reservation updated = reservationService.findByHostId("74f32f01-9c6d-4e87-b2d9-d389af693b44").get(0);
-        updated.setStart_date(LocalDate.of(2027, 8,21));
-        updated.setEnd_date(LocalDate.of(2027, 8,25));
+        Reservation testUpdate = new Reservation();
+        testUpdate.setReservation_id(1);
+        testUpdate.setStart_date(LocalDate.of(2027, 10,21));
+        testUpdate.setEnd_date(LocalDate.of(2027, 10,22));
+        testUpdate.setTotal(new BigDecimal(2450));
+        testUpdate.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Gery",
+                "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
+                "New Haven","CT","06505",new BigDecimal(464),new BigDecimal(580)));
+        testUpdate.setGuest(new Guest(5, "Topher", "Cullens", "tophCullens@aol.com",
+                "(901) 4983249", "PA"));
 
-        ReservationResult<Reservation> result = reservationService.updateReservation(updated);
-        assertNotNull(result);
-        assertEquals(result.getErrorMessages(), result.getErrorMessages().size()); //no error messages
+        testUpdate.setStart_date(LocalDate.of(2027, 10,23));
+        testUpdate.setEnd_date(LocalDate.of(2027, 10,25));
+
+        ReservationResult<Reservation> result = reservationService.updateReservation(testUpdate);
+        assertNotNull(result.getPayload());
+        assertEquals(LocalDate.of(2027, 10,23), testUpdate.getStart_date());
+        assertEquals(LocalDate.of(2027, 10,25), testUpdate.getEnd_date());
+        assertEquals(new BigDecimal(1508), testUpdate.getTotal()); //no error messages
         assertTrue(result.isSuccess());
     }
+
+    @Test
+    void shouldNotUpdateNonExistingReservation() throws DataException, FileNotFoundException {
+        Reservation testUpdate = new Reservation();
+        testUpdate.setReservation_id(1);
+        testUpdate.setStart_date(LocalDate.of(2027, 10,21));
+        testUpdate.setEnd_date(LocalDate.of(2027, 10,22));
+        testUpdate.setTotal(new BigDecimal(2450));
+        testUpdate.setHost(new Host("123","Gery",
+                "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
+                "New Haven","CT","06505",new BigDecimal(464),new BigDecimal(580)));
+        testUpdate.setGuest(new Guest(5, "Topher", "Cullens", "tophCullens@aol.com",
+                "(901) 4983249", "PA"));
+
+        ReservationResult<Reservation> result = reservationService.updateReservation(testUpdate);
+        assertFalse(result.isSuccess());
+        assertTrue(result.getErrorMessages().contains("Reservation not found."));
+    }
+
+    @Test
+    void shouldNotUpdateReservationIfAnythingBesidesStartAndEndAreAltered() throws DataException, FileNotFoundException {
+        Reservation testUpdate = new Reservation();
+        testUpdate.setReservation_id(1);
+        testUpdate.setStart_date(LocalDate.of(2027, 10,21));
+        testUpdate.setEnd_date(LocalDate.of(2027, 10,22));
+        testUpdate.setTotal(new BigDecimal(162));
+        testUpdate.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Gery",
+                "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
+                "New Haven","CT","06505",new BigDecimal(464),new BigDecimal(580)));
+        testUpdate.setGuest(new Guest(5, "Topher", "Cullens", "tophCullens@aol.com",
+                "(901) 4983249", "PA"));
+
+        ReservationResult<Reservation> result = reservationService.updateReservation(testUpdate);
+        assertFalse(result.isSuccess());
+        assertTrue(result.getErrorMessages().contains("Only start and end dates can be changed."));
+    }
+
 
     @Test
     void shouldDeleteReservation() throws DataException, FileNotFoundException {
@@ -361,13 +407,31 @@ class ReservationServiceTest {
     }
 
     @Test
+    void shouldNotDeleteReservationInPast() throws DataException, FileNotFoundException {
+        Reservation test = new Reservation();
+        test.setReservation_id(4);
+        test.setStart_date(LocalDate.of(2022, 7,29));
+        test.setEnd_date(LocalDate.of(2022, 8,6));
+        test.setTotal(new BigDecimal(100));
+        test.setHost(new Host("48dc8768-4e33-4257-a0b9-676e7b08cb7f","Charon",
+                "bcharon56@storify.com","(813) 9880586",
+                "65 Saint Paul Plaza","Tampa","FL","33647",
+                new BigDecimal(380),new BigDecimal(475)));
+        ReservationResult<Reservation> result = reservationService.deleteReservation(test);
+
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getErrorMessages().size());
+        assertTrue(result.getErrorMessages().get(0).contains("You can only delete a reservation in the future!"));
+    }
+
+    @Test
     void shouldNotDeleteNonExistingReservation() throws DataException, FileNotFoundException {
         Reservation test = new Reservation();
-        test.setReservation_id(2);
+        test.setReservation_id(9);
         test.setStart_date(LocalDate.of(2027, 8,15));
         test.setEnd_date(LocalDate.of(2027, 8, 25));
         test.setTotal(new BigDecimal(5));
-        test.setHost(new Host("80170dba-ceda-4295-982d-766ba6b2aec0","Rany","hrany71@mit.edu",
+        test.setHost(new Host("48dc8768-4e33-4257-a0b9-676e7b08cb7f","Rany","hrany71@mit.edu",
                 "(412) 9327874", "674 Sundown Lane","Pittsburgh","PA",
                 "15210",new BigDecimal(411),new BigDecimal("513.75")));
         test.setGuest(new Guest(3, "Nika", "Khvan", "nikakhvan@gmail.com",
@@ -376,6 +440,6 @@ class ReservationServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(1, result.getErrorMessages().size());
-        assertTrue(result.getErrorMessages().get(0).contains("Reservation does not exist"));
+        assertTrue(result.getErrorMessages().get(0).contains("Reservation not found"));
     }
 }

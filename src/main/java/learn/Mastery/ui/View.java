@@ -26,7 +26,7 @@ public class View {
             max = Math.max(max, option.getValue());
         }
 
-        String message = String.format("Select [%s-%s]: ", min, max - 1);
+        String message = String.format("Select [%s-%s]: ", min, max);
         return MainMenuOption.fromValue(io.readInt(message, min, max));
     }
 
@@ -40,6 +40,7 @@ public class View {
         displayHeader("Summary");
         io.println("Start: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString());
         io.println("End: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")).toString());
+        io.println("Total: " );
 
     }
 
