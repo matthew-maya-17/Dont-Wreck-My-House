@@ -78,8 +78,7 @@ public class ReservationService {
         }
 
         if (!existingReservation.getGuest().equals(updatedReservation.getGuest()) ||
-                !existingReservation.getHost().equals(updatedReservation.getHost()) ||
-                !existingReservation.getTotal().equals(updatedReservation.getTotal())) {
+                !existingReservation.getHost().equals(updatedReservation.getHost())) {
             result.addErrorMessage("Only start and end dates can be changed.");
             return result;
         }
@@ -117,6 +116,8 @@ public class ReservationService {
             result.addErrorMessage("Reservation deletion failed for some reason.");
             return result;
         }
+
+        result.setPayload(existingReservations);
         return result;
     }
 
@@ -129,7 +130,7 @@ public class ReservationService {
                 .orElse(null);
     }
 
-    private BigDecimal calculateReservationTotal(Reservation reservation) {
+    public BigDecimal calculateReservationTotal(Reservation reservation) {
         BigDecimal total = BigDecimal.ZERO;
         LocalDate start = reservation.getStart_date();
         LocalDate end = reservation.getEnd_date();

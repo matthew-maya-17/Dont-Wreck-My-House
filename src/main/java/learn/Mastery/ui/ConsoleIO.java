@@ -1,6 +1,5 @@
 package learn.Mastery.ui;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -71,6 +70,17 @@ public class ConsoleIO {
         }
     }
 
+    public LocalDate readLocalDate(String prompt) {
+        while (true) {
+            String input = readRequiredString(prompt);
+            try {
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException ex) {
+                println(INVALID_DATE);
+            }
+        }
+    }
+
     public boolean readBoolean(String prompt) {
         while (true) {
             String input = readRequiredString(prompt).toLowerCase();
@@ -80,17 +90,6 @@ public class ConsoleIO {
                 return false;
             }
             println("[INVALID] Please enter 'y' or 'n'.");
-        }
-    }
-
-    public LocalDate readLocalDate(String prompt) {
-        while (true) {
-            String input = readRequiredString(prompt);
-            try {
-                return LocalDate.parse(input, formatter);
-            } catch (DateTimeParseException ex) {
-                println(INVALID_DATE);
-            }
         }
     }
 }

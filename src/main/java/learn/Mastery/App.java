@@ -1,21 +1,31 @@
 package learn.Mastery;
 
 import learn.Mastery.data.GuestFileRepository;
-import learn.Mastery.data.GuestRepository;
 import learn.Mastery.data.HostFileRepository;
 import learn.Mastery.data.ReservationFileRepository;
 import learn.Mastery.domain.GuestService;
 import learn.Mastery.domain.HostService;
 import learn.Mastery.domain.ReservationService;
-import learn.Mastery.models.Reservation;
-import learn.Mastery.ui.ConsoleIO;
 import learn.Mastery.ui.Controller;
 import learn.Mastery.ui.View;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
     public static void main(String[] args) {
-        ConsoleIO io = new ConsoleIO();
-        View view = new View(io);
+        configureWithXMLAndRun();
+    }
+
+    private static void configureWithXMLAndRun(){
+        ApplicationContext container = new ClassPathXmlApplicationContext("dependency-configuration.xml");
+
+        Controller controller = container.getBean(Controller.class);
+        // Run the app!
+        controller.run();
+    }
+
+    private static void configureManuallyAndRun(){
+        View view = new View();
 
         HostFileRepository hostFileRepository = new HostFileRepository("./data/hosts.csv");
         GuestFileRepository guestFileRepository = new GuestFileRepository("./data/guests.csv");
