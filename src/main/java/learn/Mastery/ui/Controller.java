@@ -186,13 +186,10 @@ public class Controller {
 
 
         int reservationId = view.readInt("Reservation ID: ");
-        Reservation reservationToBeUpdated = null;
-
-        for (Reservation r : reservations){
-            if(r.getReservation_id() == reservationId){
-                reservationToBeUpdated = r;
-            }
-        }
+        Reservation reservationToBeUpdated = reservations.stream()
+                .filter(r -> r.getReservation_id() == reservationId)
+                .findFirst()
+                .orElse(null);
 
         view.displayHeader(String.format("Editing Reservation %s", reservationId));
         LocalDate start;
