@@ -3,9 +3,11 @@ package learn.Mastery.domain;
 import learn.Mastery.data.DataException;
 import learn.Mastery.data.GuestRepository;
 import learn.Mastery.models.Guest;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GuestService {
 
     GuestRepository guestRepository;

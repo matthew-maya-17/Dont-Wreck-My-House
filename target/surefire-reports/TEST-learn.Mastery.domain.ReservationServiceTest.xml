@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="learn.Mastery.domain.ReservationServiceTest" time="0.084" tests="23" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="learn.Mastery.domain.ReservationServiceTest" time="0.106" tests="23" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17\bin"/>
-    <property name="sun.java.command" value="C:\Users\matth\AppData\Local\Temp\surefire18408916852469898702\surefirebooter-20250311001738326_3.jar C:\Users\matth\AppData\Local\Temp\surefire18408916852469898702 2025-03-11T00-17-37_807-jvmRun1 surefire-20250311001738326_1tmp surefire_0-20250311001738326_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\matth\AppData\Local\Temp\surefire7647214265894734708\surefirebooter-20250311012225276_3.jar C:\Users\matth\AppData\Local\Temp\surefire7647214265894734708 2025-03-11T01-22-23_485-jvmRun1 surefire-20250311012225276_1tmp surefire_0-20250311012225276_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\matth\OneDrive\Documents\Coding and Programming\HTD\Module5\module05-mastery-project-dont-wreck-my-house-matthew-maya-17\target\test-classes;C:\Users\matth\OneDrive\Documents\Coding and Programming\HTD\Module5\module05-mastery-project-dont-wreck-my-house-matthew-maya-17\target\classes;C:\Users\matth\.m2\repository\org\springframework\spring-context\6.1.14\spring-context-6.1.14.jar;C:\Users\matth\.m2\repository\org\springframework\spring-aop\6.1.14\spring-aop-6.1.14.jar;C:\Users\matth\.m2\repository\org\springframework\spring-beans\6.1.14\spring-beans-6.1.14.jar;C:\Users\matth\.m2\repository\org\springframework\spring-core\6.1.14\spring-core-6.1.14.jar;C:\Users\matth\.m2\repository\org\springframework\spring-jcl\6.1.14\spring-jcl-6.1.14.jar;C:\Users\matth\.m2\repository\org\springframework\spring-expression\6.1.14\spring-expression-6.1.14.jar;C:\Users\matth\.m2\repository\io\micrometer\micrometer-observation\1.12.11\micrometer-observation-1.12.11.jar;C:\Users\matth\.m2\repository\io\micrometer\micrometer-commons\1.12.11\micrometer-commons-1.12.11.jar;C:\Users\matth\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.0\junit-jupiter-api-5.12.0.jar;C:\Users\matth\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\matth\.m2\repository\org\junit\platform\junit-platform-commons\1.12.0\junit-platform-commons-1.12.0.jar;C:\Users\matth\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\matth\AppData\Local\Temp\surefire18408916852469898702\surefirebooter-20250311001738326_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\matth\AppData\Local\Temp\surefire7647214265894734708\surefirebooter-20250311012225276_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.12+8-LTS-286"/>
@@ -57,27 +57,27 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldNotAddReservationThatOverlapsEndOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.019"/>
+  <testcase name="shouldNotAddReservationThatOverlapsEndOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.023"/>
   <testcase name="shouldAddValidReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
-  <testcase name="shouldFindByHostId" classname="learn.Mastery.domain.ReservationServiceTest" time="0.004"/>
+  <testcase name="shouldFindByHostId" classname="learn.Mastery.domain.ReservationServiceTest" time="0.005"/>
   <testcase name="shouldNotAddReservationIfMissingGuest" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
-  <testcase name="shouldNotAddReservationIfMissingEndDate" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
-  <testcase name="shouldNotAddReservationIfStartIsInPast" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationThatEndsOnTheStartOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
+  <testcase name="shouldNotAddReservationIfMissingEndDate" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotAddReservationIfStartIsInPast" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldNotAddReservationThatEndsOnTheStartOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
   <testcase name="shouldNotAddReservationThatOverlapsStartOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
   <testcase name="shouldNotAddReservationIfHostDoesntExist" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldUpdateReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.005"/>
-  <testcase name="shouldNotDeleteNonExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
+  <testcase name="shouldUpdateReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotDeleteNonExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
   <testcase name="shouldNotUpdateReservationIfAnythingBesidesStartAndEndAndTotalAreAltered" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationThatSurroundsExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
-  <testcase name="shouldNotAddReservationThatStartsOnTheEndOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationIfGuestDoesntExist" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationInsideExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.005"/>
-  <testcase name="shouldNotAddNullReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotDeleteReservationInPast" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationIfStartIsAfterEnd" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldDeleteReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationIfMissingStartDate" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotAddReservationIfMissingHost" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
-  <testcase name="shouldNotUpdateNonExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.001"/>
+  <testcase name="shouldNotAddReservationThatSurroundsExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotAddReservationThatStartsOnTheEndOfExistingRegistration" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotAddReservationIfGuestDoesntExist" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldNotAddReservationInsideExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotAddNullReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldNotDeleteReservationInPast" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldNotAddReservationIfStartIsAfterEnd" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldDeleteReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotAddReservationIfMissingStartDate" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
+  <testcase name="shouldNotAddReservationIfMissingHost" classname="learn.Mastery.domain.ReservationServiceTest" time="0.003"/>
+  <testcase name="shouldNotUpdateNonExistingReservation" classname="learn.Mastery.domain.ReservationServiceTest" time="0.002"/>
 </testsuite>

@@ -1,6 +1,7 @@
 package learn.Mastery.ui;
 
 import learn.Mastery.models.Reservation;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +9,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class View {
 
     private static final String INVALID_NUMBER
@@ -176,27 +178,14 @@ public class View {
         }
     }
 
-    public LocalDate readLocalDate(String prompt) {
-        while (true) {
-            String input = readRequiredString(prompt);
-            try {
-                return LocalDate.parse(input, formatter);
-            } catch (DateTimeParseException ex) {
-                println(INVALID_DATE);
-            }
-        }
-    }
-
     public LocalDate readLocalDate(String prompt, LocalDate existingValue) {
         while (true) {
             String input = readString(prompt + (existingValue != null ? " (" + existingValue.format(formatter) + "): " : " Date: "));
 
-            // 🔹 If user presses Enter & existing value exists, keep it
             if (input.isBlank() && existingValue != null) {
                 return existingValue;
             }
 
-            // 🔹 If input is empty and no existing value, ask again
             if (input.isBlank()) {
                 println(INVALID_DATE);;
                 continue;
@@ -209,22 +198,6 @@ public class View {
             }
         }
     }
-
-//    public LocalDate readLocalDate(String prompt, LocalDate existingValue) {
-//        while (true) {
-//            String input = readString(prompt);
-//
-//            if (input.isBlank() && existingValue != null) {
-//                return existingValue;
-//            }
-//
-//            try {
-//                return LocalDate.parse(input, formatter);
-//            } catch (DateTimeParseException ex) {
-//                println(INVALID_DATE);
-//            }
-//        }
-//    }
 
     public boolean readBoolean(String prompt) {
         while (true) {

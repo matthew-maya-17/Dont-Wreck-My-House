@@ -7,6 +7,7 @@ import learn.Mastery.data.ReservationRepository;
 import learn.Mastery.models.Guest;
 import learn.Mastery.models.Host;
 import learn.Mastery.models.Reservation;
+import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Service
 public class ReservationService {
 
     HostRepository hostRepository;

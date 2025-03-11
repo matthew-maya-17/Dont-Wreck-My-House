@@ -3,10 +3,12 @@ package learn.Mastery.domain;
 import learn.Mastery.data.DataException;
 import learn.Mastery.data.HostRepository;
 import learn.Mastery.models.Host;
+import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.util.List;
 
+@Service
 public class HostService {
 
     HostRepository hostRepository;

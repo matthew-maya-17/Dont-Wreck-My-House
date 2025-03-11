@@ -1,6 +1,8 @@
 package learn.Mastery.data;
 
 import learn.Mastery.models.Guest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,12 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class GuestFileRepository implements GuestRepository{
 
     private static final String DELIMETER = ",";
     private final String filePath;
 
-    public GuestFileRepository(String filePath) {
+    public GuestFileRepository(@Value("${dataGuestFilePath}") String filePath) {
         this.filePath = filePath;
     }
 

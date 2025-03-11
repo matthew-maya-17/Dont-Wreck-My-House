@@ -1,6 +1,6 @@
 # ***Don’t Wreck My House Project Plan***
 
-## Main (Estimated Time To Finish: ~54 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: 43)  
+## Main (Estimated Time To Finish: ~54 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: 50)  
 ### Models - Expected: 03/04/2025 (Estimated Time To Finish: 4 Hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~1 Hours)
 1. Guest
    - Fields:
@@ -157,7 +157,7 @@ DELETE
    - Update + validations checked
    - Delete + validations checked
 
-### UI Layer - Expected: 03/06/2025 (Estimated Time To Finish: 10 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: 8+ hours)  
+### UI Layer - Expected: 03/06/2025 (Estimated Time To Finish: 10 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: 10 hours)  
 1. MainMenuOption (ENUM)
 2. ConsoleIO (If I wanna make a separate class or integrate directly into View)
 3. View: UI Validation  (Expecting the view layer will be broken up into three sections (I/O methods,View + Add, and  Update + Delete) will each take about 4 hours with their corresponding testing)
@@ -172,7 +172,7 @@ DELETE
 - Dependency injections + setting up the application to run with instance method call (run).
 - Resource File: dependency-injection.xml
 
-### FINAL DEBUGGING + RESEARCH - Expected: 03/06/2025 - 03/07/2025 (Estimated Time To Finish: 8 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: ~4 hours but still need to debug ) 
+### FINAL DEBUGGING + RESEARCH - Expected: 03/06/2025 - 03/07/2025 (Estimated Time To Finish: 8 hours &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Actual Time Taken: 9 hours ) 
 - Solve any unresolved final issues
 
 ## Tests - Expected: 03/05/2025 - 03/06/2025
