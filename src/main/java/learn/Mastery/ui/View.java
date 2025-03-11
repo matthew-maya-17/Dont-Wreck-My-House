@@ -75,29 +75,10 @@ public class View {
         boolean update = true;
 
         LocalDate start = readLocalDate("Start", reservation.getStart_date());
-        LocalDate end = readLocalDate("End", reservation.getEnd_date());
-        if (start.isAfter(end)) {
-            println("Reservation start date cannot be after the reservation end date.");
-            update = false;
-        }
-
-        if (start.isBefore(LocalDate.now())) {
-            println("Reservation start & end date cannot be in the past. They must both be in the future.");
-            update = false;
-        }
-
-        for (Reservation r : reservations) {
-            if (r.getReservation_id() == reservation.getReservation_id()) {
-                continue;
-            }
-            if (!(end.isBefore(r.getStart_date()) || start.isAfter(r.getEnd_date()))) {
-                println("Reservation overlaps with another of the host's existing reservations.");
-                update = false;
-            }
-        }
         if (!start.toString().isEmpty()){
             reservation.setStart_date(start);
         }
+        LocalDate end = readLocalDate("End", reservation.getEnd_date());
         if (!start.toString().isEmpty()){
             reservation.setEnd_date(end);
         }
@@ -117,10 +98,9 @@ public class View {
 
     public void displayAllReservationByHostId(List<Reservation> reservations){
         if (reservations == null || reservations.isEmpty()){
-            println("No reservations found.");
+            displayStatus(false, "Host has no reservations");
             return;
         }
-        println("");
         reservations.stream()
                 .sorted((a,b) -> a.getStart_date().compareTo(b.getStart_date()))
                 .map(r -> String.format(
