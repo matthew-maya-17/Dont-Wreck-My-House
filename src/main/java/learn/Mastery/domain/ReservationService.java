@@ -59,14 +59,14 @@ public class ReservationService {
         return result;
     }
 
-    public ReservationResult<Reservation> updateReservation(Reservation updatedReservation) throws DataException {
+    public ReservationResult<Reservation> updateReservation(Reservation updatedReservation) throws DataException, FileNotFoundException {
         ReservationResult<Reservation> result = validate(updatedReservation);
 
         if (!result.isSuccess()){
             return result;
         }
 
-        List<Reservation> reservations = reservationRepository.findByHostId(updatedReservation.getHost().getHost_id());
+        List<Reservation> reservations = findByHostId(updatedReservation.getHost().getHost_id());
         Reservation existingReservation = reservations.stream()
                 .filter(r -> r.getReservation_id() == updatedReservation.getReservation_id())
                 .findFirst()
@@ -140,7 +140,7 @@ public class ReservationService {
             return BigDecimal.ZERO;
         }
 
-        while(!start.isAfter(end)){
+        while(start.isBefore(end)){
             if(start.getDayOfWeek().equals(DayOfWeek.FRIDAY) || start.getDayOfWeek().equals(DayOfWeek.SATURDAY)){
                 total = total.add(host.getWeekendRate());
             } else {
@@ -205,7 +205,8 @@ public class ReservationService {
 
         for(Reservation r : reservationRepository.findByHostId(reservation.getHost().getHost_id())){
             if(!(reservation.getEnd_date().isBefore(r.getStart_date()) ||
-                    reservation.getStart_date().isAfter(r.getEnd_date()))){
+                    reservation.getStart_date().isAfter(r.getEnd_date())) &&
+                    (reservation.getReservation_id() != r.getReservation_id())){
                 result.addErrorMessage("Reservation overlaps with another of the hosts existing reservations.");
             }
         }

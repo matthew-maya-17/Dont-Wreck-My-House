@@ -355,7 +355,7 @@ class ReservationServiceTest {
         assertNotNull(result.getPayload());
         assertEquals(LocalDate.of(2027, 10,23), testUpdate.getStart_date());
         assertEquals(LocalDate.of(2027, 10,25), testUpdate.getEnd_date());
-        assertEquals(new BigDecimal(1508), testUpdate.getTotal()); //no error messages
+        assertEquals(new BigDecimal(1044), testUpdate.getTotal()); //no error messages
         assertTrue(result.isSuccess());
     }
 
@@ -378,13 +378,12 @@ class ReservationServiceTest {
     }
 
     @Test
-    void shouldNotUpdateReservationIfAnythingBesidesStartAndEndAreAltered() throws DataException, FileNotFoundException {
+    void shouldNotUpdateReservationIfAnythingBesidesStartAndEndAndTotalAreAltered() throws DataException, FileNotFoundException {
         Reservation testUpdate = new Reservation();
         testUpdate.setReservation_id(1);
         testUpdate.setStart_date(LocalDate.of(2027, 10,21));
         testUpdate.setEnd_date(LocalDate.of(2027, 10,22));
-        testUpdate.setTotal(new BigDecimal(162));
-        testUpdate.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Gery",
+        testUpdate.setHost(new Host("74f32f01-9c6d-4e87-b2d9-d389af693b44","Mark",
                 "ngery2v@ow.ly","(203) 6385708","09 Bashford Trail",
                 "New Haven","CT","06505",new BigDecimal(464),new BigDecimal(580)));
         testUpdate.setGuest(new Guest(5, "Topher", "Cullens", "tophCullens@aol.com",

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Controller {
 
@@ -87,7 +88,7 @@ public class Controller {
             guestEmail = view.getEmail("Guest");
             guest = guestService.findByEmail(guestEmail);
             if (guest == null) {
-                System.out.println("Host not found. Please enter a registered email.");
+                System.out.println("Guest not found. Please enter a registered email.");
             }
         } while (guest == null);
 
@@ -101,42 +102,15 @@ public class Controller {
 
         List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
         view.displayAllReservationByHostId(reservations);
-        LocalDate start;
-        LocalDate end;
-        boolean isValid;
-
-        do {
-            isValid = true;
-
-            start = view.getDate("Start");
-            end = view.getDate("End");
-
-            if (start.isAfter(end)) {
-                System.out.println("Reservation start date cannot be after the reservation end date.");
-                isValid = false;
-            }
-
-            if (start.isBefore(LocalDate.now())) {
-                System.out.println("Reservation start & end date cannot be in the past. They must both be in the future.");
-                isValid = false;
-            }
-
-            for (Reservation r : reservations) {
-                if (!(end.isBefore(r.getStart_date()) || start.isAfter(r.getEnd_date()))) {
-                    System.out.println("Reservation overlaps with another of the host's existing reservations.");
-                    isValid = false;
-                }
-            }
-
-        } while (!isValid);
+        view.setStartAndEndDates(reservationToAdd, reservations);
+        
         reservationToAdd.setHost(hostLocation);
         reservationToAdd.setGuest(guest);
-        reservationToAdd.setStart_date(start);
-        reservationToAdd.setEnd_date(end);
+
 
         view.displayHeader("Summary");
-        view.displayDate(start, "Start");
-        view.displayDate(end, "End");
+        view.displayDate(reservationToAdd.getStart_date(), "Start");
+        view.displayDate(reservationToAdd.getEnd_date(), "End");
         System.out.println("Total: " + reservationService.calculateReservationTotal(reservationToAdd));
         boolean answer = view.readBooleanSummary();
         if (answer){
@@ -166,7 +140,7 @@ public class Controller {
             guestEmail = view.getEmail("Guest");
             guest = guestService.findByEmail(guestEmail);
             if (guest == null) {
-                System.out.println("Host not found. Please enter a registered email.");
+                System.out.println("Guest not found. Please enter a registered email.");
             }
         } while (guest == null);
 
@@ -181,64 +155,66 @@ public class Controller {
 
         //Displays all future reservations for guest with host
         view.displayHeader(String.format("%s: %s,%s", hostLocation.getLast_name(),hostLocation.getCity(),hostLocation.getState()));
-        List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
-        view.displayAllFutureGuestReservationByHostId(reservations);
+        List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id()); //All Reservation by Host ID
+        List<Reservation> futureReservations = reservations.stream() //Future Reservation by Host ID
+                .filter(reservation -> reservation.getStart_date().isAfter(LocalDate.now()))
+                .sorted((a,b) -> a.getStart_date().compareTo(b.getStart_date()))
+                .toList();
+        view.displayAllReservationByHostId(futureReservations);
 
 
-        int reservationId = view.readInt("Reservation ID: ");
-        Reservation reservationToBeUpdated = reservations.stream()
-                .filter(r -> r.getReservation_id() == reservationId)
-                .findFirst()
-                .orElse(null);
+        if (!(futureReservations.isEmpty())) {
+            Reservation reservationToBeUpdated = view.readReservationId(futureReservations);
 
-        view.displayHeader(String.format("Editing Reservation %s", reservationId));
-        LocalDate start;
-        LocalDate end;
-        boolean isValid;
+            view.displayHeader(String.format("Editing Reservation %s", reservationToBeUpdated.getReservation_id()));
+//            LocalDate start;
+//            LocalDate end;
+//            boolean isValid;
+//
+//            do {
+//                isValid = true;
+//
+//                start = view.readLocalDate("Start (" + reservationToBeUpdated.getStart_date().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + "): ");
+//                end = view.readLocalDate("End (" + reservationToBeUpdated.getEnd_date().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + "): ");
+//
+//                if (start.isAfter(end)) {
+//                    System.out.println("Reservation start date cannot be after the reservation end date.");
+//                    isValid = false;
+//                }
+//
+//                if (start.isBefore(LocalDate.now())) {
+//                    System.out.println("Reservation start & end date cannot be in the past. They must both be in the future.");
+//                    isValid = false;
+//                }
+//
+//                for (Reservation r : reservations) {
+//                    if (r.getReservation_id() == reservationToBeUpdated.getReservation_id()) {
+//                        continue;
+//                    }
+//                    if (!(end.isBefore(r.getStart_date()) || start.isAfter(r.getEnd_date()))) {
+//                        System.out.println("Reservation overlaps with another of the host's existing reservations.");
+//                        isValid = false;
+//                    }
+//                }
+//            } while (!isValid);
+            Boolean canDisplaySummary = view.setStartAndEndDates(reservationToBeUpdated, futureReservations);
 
-        do {
-            isValid = true;
+            BigDecimal newTotal = reservationService.calculateReservationTotal(reservationToBeUpdated);
+            reservationToBeUpdated.setTotal(newTotal);
 
-            start = view.readLocalDate("Start (" + reservationToBeUpdated.getStart_date().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + "): ");
-            end = view.readLocalDate("End (" + reservationToBeUpdated.getEnd_date().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")) + "): ");
-
-            if (start.isAfter(end)) {
-                System.out.println("Reservation start date cannot be after the reservation end date.");
-                isValid = false;
+            if(canDisplaySummary) {
+                view.displayHeader("Summary");
+                view.displayDate(reservationToBeUpdated.getStart_date(), "Start");
+                view.displayDate(reservationToBeUpdated.getEnd_date(), "End");
+                view.println("Total: " + newTotal);
+                view.readBooleanSummary();
             }
 
-            if (start.isBefore(LocalDate.now())) {
-                System.out.println("Reservation start & end date cannot be in the past. They must both be in the future.");
-                isValid = false;
-            }
-
-            for (Reservation r : reservations) {
-                if (r.getReservation_id() == reservationToBeUpdated.getReservation_id()) {
-                    continue;
-                }
-                if (!(end.isBefore(r.getStart_date()) || start.isAfter(r.getEnd_date()))) {
-                    System.out.println("Reservation overlaps with another of the host's existing reservations.");
-                    isValid = false;
-                }
-            }
-        } while (!isValid);
-
-        reservationToBeUpdated.setStart_date(start);
-        reservationToBeUpdated.setEnd_date(end);
-        BigDecimal newTotal = reservationService.calculateReservationTotal(reservationToBeUpdated);
-        reservationToBeUpdated.setTotal(newTotal);
-        view.displayHeader("Summary");
-        view.displayDate(start, "Start");
-        view.displayDate(end, "End");
-        view.println("Total: " + newTotal);
-        boolean answer = view.readBooleanSummary();
-        if (answer){
             ReservationResult<Reservation> result = reservationService.updateReservation(reservationToBeUpdated);
-            if (result.isSuccess()){
+            if (result.isSuccess()) {
                 String successMessage = String.format("Reservation %s updated.", result.getPayload().getReservation_id());
                 view.displayStatus(true, successMessage);
-            }
-            else {
+            } else {
                 view.displayStatus(false, result.getErrorMessages());
             }
         }
@@ -256,7 +232,7 @@ public class Controller {
             guestEmail = view.getEmail("Guest");
             guest = guestService.findByEmail(guestEmail);
             if (guest == null) {
-                System.out.println("Host not found. Please enter a registered email.");
+                System.out.println("Guest not found. Please enter a registered email.");
             }
         } while (guest == null);
 
@@ -270,27 +246,31 @@ public class Controller {
         } while (hostLocation == null);
 
         //Displays all future reservations for guest with host
-        view.displayHeader(String.format("%s: %s,%s", hostLocation.getLast_name(),hostLocation.getCity(),hostLocation.getState()));
+        view.displayHeader(String.format("%s: %s,%s", hostLocation.getLast_name(), hostLocation.getCity(), hostLocation.getState()));
         List<Reservation> reservations = reservationService.findByHostId(hostLocation.getHost_id());
-        view.displayAllFutureGuestReservationByHostId(reservations);
+        List<Reservation> futureReservations = reservations.stream() //Future Reservation by Host ID
+                .filter(reservation -> reservation.getStart_date().isAfter(LocalDate.now()))
+                .sorted((a,b) -> a.getStart_date().compareTo(b.getStart_date()))
+                .toList();
+        view.displayAllReservationByHostId(futureReservations);
 
+        if (!(futureReservations.isEmpty())) {
+            Reservation reservationToDelete = view.readReservationId(futureReservations);
 
-        int reservationId = view.readInt("Reservation ID: ");
-        Reservation reservationToBeDeleted = new Reservation();
-
-        for (Reservation r : reservations){
-            if(r.getReservation_id() == reservationId){
-                reservationToBeDeleted = r;
+            for (Reservation r : reservations) {
+                if (r.getReservation_id() == reservationToDelete.getReservation_id()) {
+                    reservationToDelete = r;
+                }
             }
-        }
 
-        ReservationResult<Reservation> result = reservationService.deleteReservation(reservationToBeDeleted);
-        if (result.isSuccess()){
-            String successMessage = String.format("Reservation %s deleted.", result.getPayload().getReservation_id());
-            view.displayStatus(true, successMessage);
-        }
-        else {
-            view.displayStatus(false, result.getErrorMessages());
+            ReservationResult<Reservation> result = reservationService.deleteReservation(reservationToDelete);
+
+            if (result.isSuccess()) {
+                String successMessage = String.format("Reservation %s deleted.", result.getPayload().getReservation_id());
+                view.displayStatus(true, successMessage);
+            } else {
+                view.displayStatus(false, result.getErrorMessages());
+            }
         }
     }
 }

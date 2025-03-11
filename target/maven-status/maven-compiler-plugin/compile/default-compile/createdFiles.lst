@@ -10,6 +10,7 @@ learn\Mastery\data\DataException.class
 learn\Mastery\data\GuestFileRepository.class
 learn\Mastery\domain\ReservationService.class
 learn\Mastery\models\Reservation.class
+learn\Mastery\ui\Controller$1.class
 learn\Mastery\domain\ReservationResult.class
 learn\Mastery\domain\Response.class
 learn\Mastery\domain\GuestService.class

@@ -1,7 +1,5 @@
 package learn.Mastery.ui;
 
-import learn.Mastery.data.DataException;
-import learn.Mastery.data.ReservationRepository;
 import learn.Mastery.models.Reservation;
 
 import java.time.LocalDate;
@@ -58,25 +56,64 @@ public class View {
         return MainMenuOption.fromValue(readInt(message, min, max));
     }
 
-    public String getEmail(String emailOwner){
-        return readRequiredString(String.format("%s Email: ", emailOwner));
+    public Reservation readReservationId(List<Reservation> futureReservations) {
+        Reservation reservation;
+        do {
+            int reservationId = readInt("Reservation ID: ");
+            reservation = futureReservations.stream()
+                    .filter(r -> r.getReservation_id() == reservationId)
+                    .findFirst()
+                    .orElse(null);
+            if (reservation == null){
+                println(String.format("No Reservation with id %s found.", reservationId));
+            }
+        } while (reservation == null);
+        return reservation;
     }
 
-    public LocalDate getDate(String startOrEnd){
-        return readLocalDate(String.format("%s Date [MM/dd/yyyy]: ", startOrEnd));
+    public Boolean setStartAndEndDates(Reservation reservation, List<Reservation> reservations){
+        boolean update = true;
+
+        LocalDate start = readLocalDate("Start", reservation.getStart_date());
+        LocalDate end = readLocalDate("End", reservation.getEnd_date());
+        if (start.isAfter(end)) {
+            println("Reservation start date cannot be after the reservation end date.");
+            update = false;
+        }
+
+        if (start.isBefore(LocalDate.now())) {
+            println("Reservation start & end date cannot be in the past. They must both be in the future.");
+            update = false;
+        }
+
+        for (Reservation r : reservations) {
+            if (r.getReservation_id() == reservation.getReservation_id()) {
+                continue;
+            }
+            if (!(end.isBefore(r.getStart_date()) || start.isAfter(r.getEnd_date()))) {
+                println("Reservation overlaps with another of the host's existing reservations.");
+                update = false;
+            }
+        }
+        if (!start.toString().isEmpty()){
+            reservation.setStart_date(start);
+        }
+        if (!start.toString().isEmpty()){
+            reservation.setEnd_date(end);
+        }
+
+        return update;
+
+    }
+
+    public String getEmail(String emailOwner){
+        return readRequiredString(String.format("%s Email: ", emailOwner));
     }
 
     public void displayDate(LocalDate date, String startOrEnd){
         println(startOrEnd + ": " + date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
     }
-    public void reservationSummary(){
-        LocalDate start = readLocalDate("Start Date: ");
-        LocalDate end = readLocalDate("End Date: ");
-        displayHeader("Summary");
-        println("Start [MM/dd/yyyy]: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-        println("End [MM/dd/yyyy]: " + start.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
-        println("Total: " );
-    }
+
 
     public void displayAllReservationByHostId(List<Reservation> reservations){
         if (reservations == null || reservations.isEmpty()){
@@ -85,33 +122,6 @@ public class View {
         }
         println("");
         reservations.stream()
-                .sorted((a,b) -> a.getStart_date().compareTo(b.getStart_date()))
-                .map(r -> String.format(
-                        "ID: %d, %s - %s, Guest: %s %s, Email: %s",
-                        r.getReservation_id(),
-                        r.getStart_date(),
-                        r.getEnd_date(),
-                        r.getGuest().getLast_name(),
-                        r.getGuest().getFirst_name(),
-                        r.getGuest().getEmail()
-                ))
-                .forEach(System.out::println);
-    }
-
-//    public void editReservationDates(){
-//        readLocalDate("Start (" + + ")");
-//        readLocalDate("End (" + + ")");
-//
-//    }
-
-    public void displayAllFutureGuestReservationByHostId(List<Reservation> reservations){
-        if (reservations == null || reservations.isEmpty()){
-            println("No reservations found.");
-            return;
-        }
-        println("");
-        reservations.stream()
-                .filter(reservation -> reservation.getStart_date().isAfter(LocalDate.now()))
                 .sorted((a,b) -> a.getStart_date().compareTo(b.getStart_date()))
                 .map(r -> String.format(
                         "ID: %d, %s - %s, Guest: %s %s, Email: %s",
@@ -146,21 +156,6 @@ public class View {
             println(message);
         }
     }
-
-//    public LocalDate updateLocalDate(String prompt){
-//        while (true) {
-//            print(prompt);
-//            String input = scanner.nextLine();
-//            if (input.trim().length() > 0) {
-//                m.setFrom(input);
-//            }
-//            try {
-//                return LocalDate.parse(input, formatter);
-//            } catch (DateTimeParseException ex) {
-//                println(INVALID_DATE);
-//            }
-//        }
-//    }
 
     public boolean readBooleanSummary(){
         return readBoolean("Is this okay? [y/n]: ");
@@ -211,6 +206,45 @@ public class View {
             }
         }
     }
+
+    public LocalDate readLocalDate(String prompt, LocalDate existingValue) {
+        while (true) {
+            String input = readString(prompt + (existingValue != null ? " (" + existingValue.format(formatter) + "): " : " Date: "));
+
+            // 🔹 If user presses Enter & existing value exists, keep it
+            if (input.isBlank() && existingValue != null) {
+                return existingValue;
+            }
+
+            // 🔹 If input is empty and no existing value, ask again
+            if (input.isBlank()) {
+                println(INVALID_DATE);;
+                continue;
+            }
+
+            try {
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException ex) {
+                println(INVALID_DATE);
+            }
+        }
+    }
+
+//    public LocalDate readLocalDate(String prompt, LocalDate existingValue) {
+//        while (true) {
+//            String input = readString(prompt);
+//
+//            if (input.isBlank() && existingValue != null) {
+//                return existingValue;
+//            }
+//
+//            try {
+//                return LocalDate.parse(input, formatter);
+//            } catch (DateTimeParseException ex) {
+//                println(INVALID_DATE);
+//            }
+//        }
+//    }
 
     public boolean readBoolean(String prompt) {
         while (true) {
